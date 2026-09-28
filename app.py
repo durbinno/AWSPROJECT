@@ -81,7 +81,9 @@ def register():
     conn = get_db()
     try:
         conn.execute(
-            # Insert into users
+            """INSERT INTO users
+               (username, password, firstname, lastname, email, address, filename, wordcount)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
             (username, password, firstname, lastname, email, address, filename, wordcount),
         )
         conn.commit()
