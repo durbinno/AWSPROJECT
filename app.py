@@ -131,7 +131,6 @@ def login():
 
 @app.route("/download/<username>")
 def download(username):
-    """Step 4e-ii: download button target - sends the stored file back to the browser."""
     conn = get_db()
     user = conn.execute("SELECT filename FROM users WHERE username = ?", (username,)).fetchone()
     conn.close()
@@ -140,7 +139,6 @@ def download(username):
         return "No file on record for this user. <a href='/'>Go back</a>"
 
     return send_from_directory(app.config["UPLOAD_FOLDER"], user["filename"], as_attachment=True)
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
